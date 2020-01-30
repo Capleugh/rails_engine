@@ -14,48 +14,44 @@ describe 'Merchants API' do
   end
 
   it 'can send a single merchant' do
-    id = create(:merchant).id
-    pam = create(:merchant)
+    id_1 = create(:merchant).id
+    id_2 = create(:merchant).id
 
 
-    get "/api/v1/merchants/#{id}"
+    get "/api/v1/merchants/#{id_1}"
 
     merchant = JSON.parse(response.body)["data"]["attributes"]
 
     expect(response).to be_successful
-    expect(merchant["id"]).to eq(id)
+    expect(merchant["id"]).to eq(id_1)
+    expect(merchant["id"]).to_not eq(id_2)
   end
-
-
-
-
 
 
 ########## come back and test first and last
   it 'can find a single merchant by its id' do
-    cheryl = create(:merchant)
-    pam = create(:merchant)
+    id_1 = create(:merchant).id
+    id_2 = create(:merchant).id
 
-    id = cheryl.id
-
-    #get "/api/v1/merchants/find?id=254", params: { id: id }
-    get "/api/v1/merchants/find?id=#{id}"
+    get "/api/v1/merchants/find?id=#{id_1}"
     merchant = JSON.parse(response.body)["data"]
-    #require "pry"; binding.pry
+
     expect(response).to be_successful
-    expect(merchant["attributes"]["id"]).to eq(cheryl.id)
+    expect(merchant["attributes"]["id"]).to eq(id_1)
+    expect(merchant["attributes"]["id"]).to_not eq(id_2)
   end
 
   it 'can find a single merchant by its name' do
-    cheryl = create(:merchant)
-    pam = create(:merchant)
+    cheryl = create(:merchant).name
+    pam = create(:merchant).name
 
-    get "/api/v1/merchants/find?name=#{cheryl.name}"
+    get "/api/v1/merchants/find?name=#{cheryl}"
 
     merchant = JSON.parse(response.body)["data"]
 
     expect(response).to be_successful
-    expect(merchant["attributes"]["name"]).to eq(cheryl.name)
+    expect(merchant["attributes"]["name"]).to eq(cheryl)
+    expect(merchant["attributes"]["name"]).to_not eq(pam)
   end
 
   it 'can find a single merchant by created at' do
@@ -75,7 +71,6 @@ describe 'Merchants API' do
     cheryl = create(:merchant)
     pam = create(:merchant)
 
-
     get "/api/v1/merchants/find?updated_at=#{cheryl.updated_at}"
 
     merchant = JSON.parse(response.body)["data"]
@@ -84,7 +79,32 @@ describe 'Merchants API' do
     expect(merchant["attributes"]["id"]).to eq(cheryl.id)
   end
 
-  it 'it can find all merchant by id' do
-    
+  it 'it can find all merchants id' do
+    id_1 = create(:merchant).id
+    id_2 = create(:merchant).id
+    create(:merchant)
+
+    get "/api/v1/merchants/find_all?id=#{id_1}"
+
+    merchant = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+
+    expect(merchant[0]["attributes"]["id"]).to eq(id_1)
+    expect(merchant[0]["attributes"]["id"]).to_not eq(id_2)
+    expect(merchant.count).to eq(1)
+  end
+
+  it 'it can find all merchants by name' do
+    create(:merchant, name: "Cheryl")
+    create(:merchant, name: "Cheryl")
+    create(:merchant)
+
+    get "/api/v1/merchants/find_all?name=Cheryl"
+
+    merchant = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+
+    expect(merchant[0]["attributes"]["name"]).to eq("Cheryl")
+    expect(merchant.count).to eq(2)
   end
 end
