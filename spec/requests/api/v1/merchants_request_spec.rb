@@ -94,17 +94,50 @@ describe 'Merchants API' do
     expect(merchant.count).to eq(1)
   end
 
-  it 'it can find all merchants by name' do
-    create(:merchant, name: "Cheryl")
+  it 'can find all merchants by name' do
+    cheryl = create(:merchant, name: "Cheryl")
     create(:merchant, name: "Cheryl")
     create(:merchant)
 
     get "/api/v1/merchants/find_all?name=Cheryl"
 
     merchant = JSON.parse(response.body)["data"]
+
     expect(response).to be_successful
 
     expect(merchant[0]["attributes"]["name"]).to eq("Cheryl")
+    expect(merchant.count).to eq(2)
+  end
+
+  it 'can find all merchants by created_at' do
+    cheryl = create(:merchant, created_at: "Thu, 09 Jan 2020 08:12:00 UTC +00:00")
+    pam = create(:merchant, created_at: "Thu, 09 Jan 2020 08:12:00 UTC +00:00")
+    create(:merchant)
+
+    get "/api/v1/merchants/find_all?created_at=Thu, 09 Jan 2020 08:12:00 UTC +00:00"
+
+    merchant = JSON.parse(response.body)["data"]
+
+    expect(response).to be_successful
+
+    expect(merchant[0]["attributes"]["name"]).to eq(cheryl.name)
+    expect(merchant[1]["attributes"]["name"]).to eq(pam.name)
+    expect(merchant.count).to eq(2)
+  end
+
+  it 'can find all merchants by updated_at' do
+    cheryl = create(:merchant, updated_at: "Thu, 09 Jan 2020 08:12:00 UTC +00:00")
+    pam = create(:merchant, updated_at: "Thu, 09 Jan 2020 08:12:00 UTC +00:00")
+    create(:merchant)
+
+    get "/api/v1/merchants/find_all?updated_at=Thu, 09 Jan 2020 08:12:00 UTC +00:00"
+
+    merchant = JSON.parse(response.body)["data"]
+
+    expect(response).to be_successful
+
+    expect(merchant[0]["attributes"]["name"]).to eq(cheryl.name)
+    expect(merchant[1]["attributes"]["name"]).to eq(pam.name)
     expect(merchant.count).to eq(2)
   end
 end
