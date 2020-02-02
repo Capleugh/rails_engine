@@ -11,6 +11,13 @@ Rails.application.routes.draw do
           resources :items, only: :index
         end
       end
+
+      resources :items, only: [:index] do
+        # it passes regardless of whether ot not it's index or show? why? ^^^^
+        scope module: :items do
+          resources :merchant, only: :index
+        end
+      end
     end
   end
 end
