@@ -16,7 +16,7 @@ describe 'Items API' do
     expect(items.count).to eq(3)
   end
 
-  it 'test an item can load an associated merchant' do
+  it 'test an item can find an associated merchant' do
     cheryl = create(:merchant)
     glengoolie_blue = create(:item, merchant: cheryl)
     glengoolie_black = create(:item, merchant: cheryl)
@@ -26,7 +26,7 @@ describe 'Items API' do
     expect(response).to be_successful
 
     merchant = JSON.parse(response.body)["data"]
-    
+
     expect(merchant["attributes"]["id"]).to eq(cheryl.id)
     expect(merchant["attributes"]["name"]).to eq(cheryl.name)
   end
