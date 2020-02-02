@@ -27,8 +27,6 @@ describe 'Merchants API' do
     expect(merchant["id"]).to_not eq(id_2)
   end
 
-
-########## come back and test first and last
   it 'can find a single merchant by its id' do
     id_1 = create(:merchant).id
     id_2 = create(:merchant).id
@@ -41,7 +39,7 @@ describe 'Merchants API' do
     expect(merchant["attributes"]["id"]).to_not eq(id_2)
   end
 
-  it 'can find a single merchant by its name' do
+  it 'can find all merchants who share a name' do
     cheryl = create(:merchant).name
     pam = create(:merchant).name
 
@@ -79,7 +77,7 @@ describe 'Merchants API' do
     expect(merchant["attributes"]["id"]).to eq(cheryl.id)
   end
 
-  it 'it can find all merchants id' do
+  it 'it can find all merchants with an id' do
     id_1 = create(:merchant).id
     id_2 = create(:merchant).id
     create(:merchant)
