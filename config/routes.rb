@@ -12,7 +12,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :items, only: [:index] do
+      scope :items, module: :items do
+        get '/find', to: 'search#show'
+      end
+
+      resources :items, only: [:index, :show] do
         # it passes regardless of whether ot not it's index or show? why? ^^^^
         scope module: :items do
           resources :merchant, only: :index
