@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       scope :merchants, module: :merchants do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
+        get '/most_revenue', to: 'revenue#index'
       end
 
       resources :merchants, only: [:index, :show] do
