@@ -6,8 +6,14 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def index
-    items = Item.where(request.query_parameters)
+    if params[:merchant_id]
+      items = Item.order_items.where(request.query_parameters)
 
-    render json: ItemSerializer.new(items)
+      render json: ItemSerializer.new(items)
+    elsif
+      items = Item.where(request.query_parameters)
+
+      render json: ItemSerializer.new(items)
+    end
   end
 end

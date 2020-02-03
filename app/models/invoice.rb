@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: [:shipped]
+
+  def self.order_invoices
+    order(:id)
+  end
 end

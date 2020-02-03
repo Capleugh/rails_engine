@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         scope module: :merchants do
           resources :items, only: :index
+          resources :invoices, only: :index
         end
       end
 
@@ -18,11 +19,17 @@ Rails.application.routes.draw do
       end
 
       resources :items, only: [:index, :show] do
-        # it passes regardless of whether ot not it's index or show? why? ^^^^
         scope module: :items do
           resources :merchant, only: :index
         end
       end
+
+      scope :invoices, module: :invoices do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+      end
+
+      resources :invoices, only: [:show, :index]
     end
   end
 end
