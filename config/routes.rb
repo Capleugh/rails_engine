@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      scope :merchants, module: :merchants do
+      namespace :merchants do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
         get '/most_revenue', to: 'revenue#index'
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :items, module: :items do
+      namespace :items do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
       end
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :invoices, module: :invoices do
+      namespace :invoices do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
       end
