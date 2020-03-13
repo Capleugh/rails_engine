@@ -20,7 +20,7 @@ This project showcases custom assembled JSON API endpoints which expose data imp
    * `faker`
    
 ## Schema 
-![alt text](Screen Shot 2020-02-09 at 7.05.36 PM)
+![alt text](Screen Shot 2020-02-09 at 7.05.36 PM.png)
 
 ## Built With
 * Ruby on Rails - web framework (version)
