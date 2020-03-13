@@ -19,7 +19,7 @@ This project showcases custom assembled JSON API endpoints which expose data imp
    * `factory_bot_rails`
    * `faker`
 
-## Built with
+## Built With
 * Ruby on Rails - web framework (version)
 * PostgresQL - database manager
 * [Fast JSON API](https://github.com/Netflix/fast_jsonapi/blob/master/performance_methodology.md)  
