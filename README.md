@@ -20,7 +20,7 @@ This project showcases custom assembled JSON API endpoints which expose data imp
    * `faker`
    
 ## Schema 
-![alt text](https://github.com/Capleugh/rails_engine/files/4331931/rails_engine_schema.pdf)
+![rails engine schema](https://user-images.githubusercontent.com/47065120/76666603-77346b80-654e-11ea-9068-261726507c83.png)
 
 ## Built With
 * Ruby on Rails - web framework (version)
