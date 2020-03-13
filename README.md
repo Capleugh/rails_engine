@@ -18,8 +18,12 @@ This project showcases custom assembled JSON API endpoints which expose data imp
    * `shoulda-matchers`
    * `factory_bot_rails`
    * `faker`
+   
+## Schema 
+![alt text](Screen Shot 2020-02-09 at 7.05.36 PM)
 
 ## Built With
 * Ruby on Rails - web framework (version)
 * PostgresQL - database manager
-* [Fast JSON API](https://github.com/Netflix/fast_jsonapi/blob/master/performance_methodology.md)  
+* [Fast JSON API](https://github.com/Netflix/fast_jsonapi/blob/master/performance_methodology.md) 
+
